@@ -1,0 +1,1675 @@
+
+main.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         00000050  00800100  00000802  00000896  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         00000802  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .bss          0000001a  00800150  00800150  000008e6  2**0
+                  ALLOC
+  3 .debug_aranges 00000060  00000000  00000000  000008e6  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_pubnames 0000033c  00000000  00000000  00000946  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   00000d16  00000000  00000000  00000c82  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 000004cb  00000000  00000000  00001998  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   00000b9a  00000000  00000000  00001e63  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  000001f0  00000000  00000000  00002a00  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    000003a6  00000000  00000000  00002bf0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    000002df  00000000  00000000  00002f96  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	1d c0       	rjmp	.+58     	; 0x3c <__ctors_end>
+   2:	37 c0       	rjmp	.+110    	; 0x72 <__bad_interrupt>
+   4:	d2 c1       	rjmp	.+932    	; 0x3aa <__vector_2>
+   6:	35 c0       	rjmp	.+106    	; 0x72 <__bad_interrupt>
+   8:	34 c0       	rjmp	.+104    	; 0x72 <__bad_interrupt>
+   a:	2b c1       	rjmp	.+598    	; 0x262 <__vector_5>
+   c:	32 c0       	rjmp	.+100    	; 0x72 <__bad_interrupt>
+   e:	31 c0       	rjmp	.+98     	; 0x72 <__bad_interrupt>
+  10:	30 c0       	rjmp	.+96     	; 0x72 <__bad_interrupt>
+  12:	2f c0       	rjmp	.+94     	; 0x72 <__bad_interrupt>
+  14:	2e c0       	rjmp	.+92     	; 0x72 <__bad_interrupt>
+  16:	2d c0       	rjmp	.+90     	; 0x72 <__bad_interrupt>
+  18:	2c c0       	rjmp	.+88     	; 0x72 <__bad_interrupt>
+  1a:	2b c0       	rjmp	.+86     	; 0x72 <__bad_interrupt>
+  1c:	2a c0       	rjmp	.+84     	; 0x72 <__bad_interrupt>
+  1e:	29 c0       	rjmp	.+82     	; 0x72 <__bad_interrupt>
+  20:	0f c2       	rjmp	.+1054   	; 0x440 <__vector_16>
+  22:	27 c0       	rjmp	.+78     	; 0x72 <__bad_interrupt>
+  24:	26 c0       	rjmp	.+76     	; 0x72 <__bad_interrupt>
+  26:	25 c0       	rjmp	.+74     	; 0x72 <__bad_interrupt>
+  28:	24 c0       	rjmp	.+72     	; 0x72 <__bad_interrupt>
+  2a:	23 c0       	rjmp	.+70     	; 0x72 <__bad_interrupt>
+  2c:	22 c0       	rjmp	.+68     	; 0x72 <__bad_interrupt>
+  2e:	21 c0       	rjmp	.+66     	; 0x72 <__bad_interrupt>
+  30:	20 c0       	rjmp	.+64     	; 0x72 <__bad_interrupt>
+  32:	1f c0       	rjmp	.+62     	; 0x72 <__bad_interrupt>
+
+00000034 <X>:
+  34:	08 01 04 07 01 04 07 00                             ........
+
+0000003c <__ctors_end>:
+  3c:	11 24       	eor	r1, r1
+  3e:	1f be       	out	0x3f, r1	; 63
+  40:	cf ef       	ldi	r28, 0xFF	; 255
+  42:	d2 e0       	ldi	r29, 0x02	; 2
+  44:	de bf       	out	0x3e, r29	; 62
+  46:	cd bf       	out	0x3d, r28	; 61
+
+00000048 <__do_copy_data>:
+  48:	11 e0       	ldi	r17, 0x01	; 1
+  4a:	a0 e0       	ldi	r26, 0x00	; 0
+  4c:	b1 e0       	ldi	r27, 0x01	; 1
+  4e:	e2 e0       	ldi	r30, 0x02	; 2
+  50:	f8 e0       	ldi	r31, 0x08	; 8
+  52:	02 c0       	rjmp	.+4      	; 0x58 <.do_copy_data_start>
+
+00000054 <.do_copy_data_loop>:
+  54:	05 90       	lpm	r0, Z+
+  56:	0d 92       	st	X+, r0
+
+00000058 <.do_copy_data_start>:
+  58:	a0 35       	cpi	r26, 0x50	; 80
+  5a:	b1 07       	cpc	r27, r17
+  5c:	d9 f7       	brne	.-10     	; 0x54 <.do_copy_data_loop>
+
+0000005e <__do_clear_bss>:
+  5e:	11 e0       	ldi	r17, 0x01	; 1
+  60:	a0 e5       	ldi	r26, 0x50	; 80
+  62:	b1 e0       	ldi	r27, 0x01	; 1
+  64:	01 c0       	rjmp	.+2      	; 0x68 <.do_clear_bss_start>
+
+00000066 <.do_clear_bss_loop>:
+  66:	1d 92       	st	X+, r1
+
+00000068 <.do_clear_bss_start>:
+  68:	aa 36       	cpi	r26, 0x6A	; 106
+  6a:	b1 07       	cpc	r27, r17
+  6c:	e1 f7       	brne	.-8      	; 0x66 <.do_clear_bss_loop>
+  6e:	67 d1       	rcall	.+718    	; 0x33e <main>
+  70:	c6 c3       	rjmp	.+1932   	; 0x7fe <_exit>
+
+00000072 <__bad_interrupt>:
+  72:	c6 cf       	rjmp	.-116    	; 0x0 <__vectors>
+
+00000074 <AlarmCheck>:
+
+///////////////////////////////////////////////////
+// Проверка будильника
+///////////////////////////////////////////////////
+void AlarmCheck(void){
+	timeout_alarm= COUNTER_FOR_SOUND;
+  74:	88 ef       	ldi	r24, 0xF8	; 248
+  76:	93 e0       	ldi	r25, 0x03	; 3
+  78:	90 93 5a 01 	sts	0x015A, r25
+  7c:	80 93 59 01 	sts	0x0159, r24
+	sound_of_alarm = 1;
+  80:	81 e0       	ldi	r24, 0x01	; 1
+  82:	80 93 51 01 	sts	0x0151, r24
+  86:	88 e8       	ldi	r24, 0x88	; 136
+  88:	93 e1       	ldi	r25, 0x13	; 19
+  8a:	28 ec       	ldi	r18, 0xC8	; 200
+  8c:	30 e0       	ldi	r19, 0x00	; 0
+  8e:	f9 01       	movw	r30, r18
+  90:	31 97       	sbiw	r30, 0x01	; 1
+  92:	f1 f7       	brne	.-4      	; 0x90 <AlarmCheck+0x1c>
+  94:	01 97       	sbiw	r24, 0x01	; 1
+  96:	d9 f7       	brne	.-10     	; 0x8e <AlarmCheck+0x1a>
+	_delay_ms(500);
+}
+  98:	08 95       	ret
+
+0000009a <AlarmOff>:
+///////////////////////////////////////////////////
+// Выключение будильника 
+///////////////////////////////////////////////////
+void AlarmOff(void){
+	//сбрасываем регистр будильника 
+	write_DS(0x0F, 0);
+  9a:	8f e0       	ldi	r24, 0x0F	; 15
+  9c:	60 e0       	ldi	r22, 0x00	; 0
+  9e:	ef d2       	rcall	.+1502   	; 0x67e <write_DS>
+  a0:	88 e8       	ldi	r24, 0x88	; 136
+  a2:	93 e1       	ldi	r25, 0x13	; 19
+  a4:	28 ec       	ldi	r18, 0xC8	; 200
+  a6:	30 e0       	ldi	r19, 0x00	; 0
+  a8:	f9 01       	movw	r30, r18
+  aa:	31 97       	sbiw	r30, 0x01	; 1
+  ac:	f1 f7       	brne	.-4      	; 0xaa <AlarmOff+0x10>
+  ae:	01 97       	sbiw	r24, 0x01	; 1
+  b0:	d9 f7       	brne	.-10     	; 0xa8 <AlarmOff+0xe>
+	_delay_ms(500);
+	//выключаем звук 
+	sound_of_alarm = 0;
+  b2:	10 92 51 01 	sts	0x0151, r1
+}
+  b6:	08 95       	ret
+
+000000b8 <Set>:
+	//мигание курсора
+	LCD_gotoXY(pgm_read_byte(&X[conf_mode]), conf_mode>3);
+}
+
+
+void Set(struct Time* ds,uint8_t t) {
+  b8:	dc 01       	movw	r26, r24
+	uint8_t* p = (uint8_t*)ds;
+		*p = (*p < max_value[conf_mode])? *p+1:min_value[conf_mode];
+  ba:	9c 91       	ld	r25, X
+  bc:	e0 91 52 01 	lds	r30, 0x0152
+  c0:	f0 e0       	ldi	r31, 0x00	; 0
+  c2:	e0 50       	subi	r30, 0x00	; 0
+  c4:	ff 4f       	sbci	r31, 0xFF	; 255
+  c6:	80 81       	ld	r24, Z
+  c8:	98 17       	cp	r25, r24
+  ca:	18 f4       	brcc	.+6      	; 0xd2 <Set+0x1a>
+  cc:	e9 2f       	mov	r30, r25
+  ce:	ef 5f       	subi	r30, 0xFF	; 255
+  d0:	06 c0       	rjmp	.+12     	; 0xde <Set+0x26>
+  d2:	e0 91 52 01 	lds	r30, 0x0152
+  d6:	f0 e0       	ldi	r31, 0x00	; 0
+  d8:	e9 5f       	subi	r30, 0xF9	; 249
+  da:	fe 4f       	sbci	r31, 0xFE	; 254
+  dc:	e0 81       	ld	r30, Z
+  de:	ec 93       	st	X, r30
+		if ((*p & 0x0F) > 0x09) {
+  e0:	8e 2f       	mov	r24, r30
+  e2:	90 e0       	ldi	r25, 0x00	; 0
+  e4:	8f 70       	andi	r24, 0x0F	; 15
+  e6:	90 70       	andi	r25, 0x00	; 0
+  e8:	0a 97       	sbiw	r24, 0x0a	; 10
+  ea:	1c f0       	brlt	.+6      	; 0xf2 <Set+0x3a>
+				*p = (*p & 0xF0) + 0x10;
+  ec:	e0 7f       	andi	r30, 0xF0	; 240
+  ee:	e0 5f       	subi	r30, 0xF0	; 240
+  f0:	ec 93       	st	X, r30
+		}
+		write_DS(t, *p);
+  f2:	86 2f       	mov	r24, r22
+  f4:	6c 91       	ld	r22, X
+  f6:	c3 d2       	rcall	.+1414   	; 0x67e <write_DS>
+		if (!menu_item)
+  f8:	80 91 5b 01 	lds	r24, 0x015B
+  fc:	88 23       	and	r24, r24
+  fe:	21 f4       	brne	.+8      	; 0x108 <Set+0x50>
+			update_flag       = 1;
+ 100:	81 e0       	ldi	r24, 0x01	; 1
+ 102:	80 93 4d 01 	sts	0x014D, r24
+ 106:	08 95       	ret
+		else 
+			update_alarm_flag = 1;
+ 108:	81 e0       	ldi	r24, 0x01	; 1
+ 10a:	80 93 50 01 	sts	0x0150, r24
+ 10e:	08 95       	ret
+
+00000110 <SetTime>:
+
+///////////////////////////////////////////////////
+// Увеличение времени 
+///////////////////////////////////////////////////
+void SetTime(void){
+	switch(conf_mode){
+ 110:	80 91 52 01 	lds	r24, 0x0152
+ 114:	84 30       	cpi	r24, 0x04	; 4
+ 116:	a1 f0       	breq	.+40     	; 0x140 <SetTime+0x30>
+ 118:	85 30       	cpi	r24, 0x05	; 5
+ 11a:	28 f4       	brcc	.+10     	; 0x126 <SetTime+0x16>
+ 11c:	81 30       	cpi	r24, 0x01	; 1
+ 11e:	41 f0       	breq	.+16     	; 0x130 <SetTime+0x20>
+ 120:	82 30       	cpi	r24, 0x02	; 2
+ 122:	d9 f4       	brne	.+54     	; 0x15a <SetTime+0x4a>
+ 124:	09 c0       	rjmp	.+18     	; 0x138 <SetTime+0x28>
+ 126:	85 30       	cpi	r24, 0x05	; 5
+ 128:	79 f0       	breq	.+30     	; 0x148 <SetTime+0x38>
+ 12a:	86 30       	cpi	r24, 0x06	; 6
+ 12c:	b1 f4       	brne	.+44     	; 0x15a <SetTime+0x4a>
+ 12e:	11 c0       	rjmp	.+34     	; 0x152 <SetTime+0x42>
+		//часы
+		case 1: 
+			Set(&current_ds_Time.hours, HOURS_REG);
+ 130:	8e e5       	ldi	r24, 0x5E	; 94
+ 132:	91 e0       	ldi	r25, 0x01	; 1
+ 134:	62 e0       	ldi	r22, 0x02	; 2
+ 136:	0b c0       	rjmp	.+22     	; 0x14e <SetTime+0x3e>
+			break;
+		//минуты
+		case 2:			
+			Set(&current_ds_Time.minutes,MINUTES_REG);
+ 138:	8d e5       	ldi	r24, 0x5D	; 93
+ 13a:	91 e0       	ldi	r25, 0x01	; 1
+ 13c:	61 e0       	ldi	r22, 0x01	; 1
+ 13e:	07 c0       	rjmp	.+14     	; 0x14e <SetTime+0x3e>
+			break;
+		//дни
+		case 4: 
+			Set(&current_ds_Time.date, DATE_REG);
+ 140:	80 e6       	ldi	r24, 0x60	; 96
+ 142:	91 e0       	ldi	r25, 0x01	; 1
+ 144:	64 e0       	ldi	r22, 0x04	; 4
+ 146:	03 c0       	rjmp	.+6      	; 0x14e <SetTime+0x3e>
+			break;
+		//месяцы
+		case 5: 
+			Set(&current_ds_Time.month, MONTH_REG);
+ 148:	81 e6       	ldi	r24, 0x61	; 97
+ 14a:	91 e0       	ldi	r25, 0x01	; 1
+ 14c:	65 e0       	ldi	r22, 0x05	; 5
+ 14e:	b4 df       	rcall	.-152    	; 0xb8 <Set>
+ 150:	08 95       	ret
+			break;
+		//годы
+		case 6: 
+			Set(&current_ds_Time.year,  YEAR_REG);
+ 152:	82 e6       	ldi	r24, 0x62	; 98
+ 154:	91 e0       	ldi	r25, 0x01	; 1
+ 156:	66 e0       	ldi	r22, 0x06	; 6
+ 158:	af df       	rcall	.-162    	; 0xb8 <Set>
+ 15a:	08 95       	ret
+
+0000015c <SetAlarmTime>:
+}
+
+
+
+void SetAlarmTime(void){
+	switch(conf_mode){
+ 15c:	80 91 52 01 	lds	r24, 0x0152
+ 160:	82 30       	cpi	r24, 0x02	; 2
+ 162:	41 f0       	breq	.+16     	; 0x174 <SetAlarmTime+0x18>
+ 164:	84 30       	cpi	r24, 0x04	; 4
+ 166:	59 f0       	breq	.+22     	; 0x17e <SetAlarmTime+0x22>
+ 168:	81 30       	cpi	r24, 0x01	; 1
+ 16a:	69 f4       	brne	.+26     	; 0x186 <SetAlarmTime+0x2a>
+	
+		//часы
+		case 1: 
+			Set(&alarm_ds_Time.hours, ALARM_HOURS_REG);
+ 16c:	85 e6       	ldi	r24, 0x65	; 101
+ 16e:	91 e0       	ldi	r25, 0x01	; 1
+ 170:	69 e0       	ldi	r22, 0x09	; 9
+ 172:	03 c0       	rjmp	.+6      	; 0x17a <SetAlarmTime+0x1e>
+			break;
+		//минуты
+		case 2:		
+			Set(&alarm_ds_Time.minutes, ALARM_MINUTES_REG);
+ 174:	84 e6       	ldi	r24, 0x64	; 100
+ 176:	91 e0       	ldi	r25, 0x01	; 1
+ 178:	68 e0       	ldi	r22, 0x08	; 8
+ 17a:	9e df       	rcall	.-196    	; 0xb8 <Set>
+ 17c:	08 95       	ret
+			break;
+		//дни
+		case 4: 
+			Set(&alarm_ds_Time.date, ALARM_MASK_REG);
+ 17e:	87 e6       	ldi	r24, 0x67	; 103
+ 180:	91 e0       	ldi	r25, 0x01	; 1
+ 182:	6a e0       	ldi	r22, 0x0A	; 10
+ 184:	99 df       	rcall	.-206    	; 0xb8 <Set>
+ 186:	08 95       	ret
+
+00000188 <SetCursor>:
+// Установка курсора при изменении времени 
+///////////////////////////////////////////////////
+const PROGMEM uint8_t X[] = {8,1,4,7,1,4,7};
+void SetCursor(void){
+	//мигание курсора
+	LCD_gotoXY(pgm_read_byte(&X[conf_mode]), conf_mode>3);
+ 188:	e0 91 52 01 	lds	r30, 0x0152
+ 18c:	f0 e0       	ldi	r31, 0x00	; 0
+ 18e:	ec 5c       	subi	r30, 0xCC	; 204
+ 190:	ff 4f       	sbci	r31, 0xFF	; 255
+ 192:	94 91       	lpm	r25, Z+
+ 194:	80 91 52 01 	lds	r24, 0x0152
+ 198:	60 e0       	ldi	r22, 0x00	; 0
+ 19a:	84 30       	cpi	r24, 0x04	; 4
+ 19c:	08 f0       	brcs	.+2      	; 0x1a0 <SetCursor+0x18>
+ 19e:	61 e0       	ldi	r22, 0x01	; 1
+ 1a0:	89 2f       	mov	r24, r25
+ 1a2:	28 d2       	rcall	.+1104   	; 0x5f4 <LCD_gotoXY>
+}
+ 1a4:	08 95       	ret
+
+000001a6 <DisplayAlarmTime>:
+}
+
+///////////////////////////////////////////////////
+// Отображение времени при установке будильника
+///////////////////////////////////////////////////
+void DisplayAlarmTime(void){				
+ 1a6:	0f 93       	push	r16
+ 1a8:	1f 93       	push	r17
+	//преобразовываем значения в строку для вывода на экран 
+	time2str(&alarm_ds_Time, buf_alarm);
+ 1aa:	03 e2       	ldi	r16, 0x23	; 35
+ 1ac:	11 e0       	ldi	r17, 0x01	; 1
+ 1ae:	83 e6       	ldi	r24, 0x63	; 99
+ 1b0:	91 e0       	ldi	r25, 0x01	; 1
+ 1b2:	b8 01       	movw	r22, r16
+ 1b4:	04 d3       	rcall	.+1544   	; 0x7be <time2str>
+	seconds_hi = buf_alarm[6];
+ 1b6:	80 91 29 01 	lds	r24, 0x0129
+ 1ba:	80 93 4e 01 	sts	0x014E, r24
+	seconds_lo = buf_alarm[7];
+ 1be:	80 91 2a 01 	lds	r24, 0x012A
+ 1c2:	80 93 4f 01 	sts	0x014F, r24
+	
+	//вывод времени
+	LCD_gotoXY(0,0);
+ 1c6:	80 e0       	ldi	r24, 0x00	; 0
+ 1c8:	60 e0       	ldi	r22, 0x00	; 0
+ 1ca:	14 d2       	rcall	.+1064   	; 0x5f4 <LCD_gotoXY>
+	LCD_putstring(buf_alarm);
+ 1cc:	c8 01       	movw	r24, r16
+ 1ce:	1b d2       	rcall	.+1078   	; 0x606 <LCD_putstring>
+	//вывод даты 
+	LCD_gotoXY(0,1);
+ 1d0:	80 e0       	ldi	r24, 0x00	; 0
+ 1d2:	61 e0       	ldi	r22, 0x01	; 1
+ 1d4:	0f d2       	rcall	.+1054   	; 0x5f4 <LCD_gotoXY>
+	LCD_putstring(buf_alarm+12);	
+ 1d6:	c8 01       	movw	r24, r16
+ 1d8:	0c 96       	adiw	r24, 0x0c	; 12
+ 1da:	15 d2       	rcall	.+1066   	; 0x606 <LCD_putstring>
+	
+}
+ 1dc:	1f 91       	pop	r17
+ 1de:	0f 91       	pop	r16
+ 1e0:	08 95       	ret
+
+000001e2 <DisplayMenu>:
+}
+
+///////////////////////////////////////////////////
+// Вывод времени 
+///////////////////////////////////////////////////
+void DisplayMenu(void){
+ 1e2:	0f 93       	push	r16
+ 1e4:	1f 93       	push	r17
+	update_flag = 0;
+ 1e6:	10 92 4d 01 	sts	0x014D, r1
+	seconds_hi = buf_menu[6];
+ 1ea:	0e e3       	ldi	r16, 0x3E	; 62
+ 1ec:	11 e0       	ldi	r17, 0x01	; 1
+ 1ee:	80 91 3e 01 	lds	r24, 0x013E
+ 1f2:	80 93 4e 01 	sts	0x014E, r24
+	seconds_lo = buf_menu[7];
+ 1f6:	80 91 3f 01 	lds	r24, 0x013F
+ 1fa:	80 93 4f 01 	sts	0x014F, r24
+	
+	LCD_gotoXY(0,0);
+ 1fe:	80 e0       	ldi	r24, 0x00	; 0
+ 200:	60 e0       	ldi	r22, 0x00	; 0
+ 202:	f8 d1       	rcall	.+1008   	; 0x5f4 <LCD_gotoXY>
+	LCD_putstring(buf_menu);
+ 204:	c8 01       	movw	r24, r16
+ 206:	06 97       	sbiw	r24, 0x06	; 6
+ 208:	fe d1       	rcall	.+1020   	; 0x606 <LCD_putstring>
+	LCD_gotoXY(0,1);
+ 20a:	80 e0       	ldi	r24, 0x00	; 0
+ 20c:	61 e0       	ldi	r22, 0x01	; 1
+ 20e:	f2 d1       	rcall	.+996    	; 0x5f4 <LCD_gotoXY>
+	LCD_putstring(buf_menu+12);	
+ 210:	c8 01       	movw	r24, r16
+ 212:	06 96       	adiw	r24, 0x06	; 6
+ 214:	f8 d1       	rcall	.+1008   	; 0x606 <LCD_putstring>
+}
+ 216:	1f 91       	pop	r17
+ 218:	0f 91       	pop	r16
+ 21a:	08 95       	ret
+
+0000021c <DisplayTime>:
+
+
+///////////////////////////////////////////////////
+// Отображение врмени 
+///////////////////////////////////////////////////
+void DisplayTime(void){
+ 21c:	0f 93       	push	r16
+ 21e:	1f 93       	push	r17
+	cli();
+ 220:	f8 94       	cli
+	// Считываем время 		
+	ds_GetTime(&current_ds_Time);
+ 222:	8c e5       	ldi	r24, 0x5C	; 92
+ 224:	91 e0       	ldi	r25, 0x01	; 1
+ 226:	ad d2       	rcall	.+1370   	; 0x782 <ds_GetTime>
+	sei();	
+ 228:	78 94       	sei
+	//преобразовываем значения времени в строку для вывода на экран 
+	time2str(&current_ds_Time, buf_time);
+ 22a:	0e e0       	ldi	r16, 0x0E	; 14
+ 22c:	11 e0       	ldi	r17, 0x01	; 1
+ 22e:	8c e5       	ldi	r24, 0x5C	; 92
+ 230:	91 e0       	ldi	r25, 0x01	; 1
+ 232:	b8 01       	movw	r22, r16
+ 234:	c4 d2       	rcall	.+1416   	; 0x7be <time2str>
+	seconds_hi = buf_time[6];
+ 236:	80 91 14 01 	lds	r24, 0x0114
+ 23a:	80 93 4e 01 	sts	0x014E, r24
+	seconds_lo = buf_time[7];
+ 23e:	80 91 15 01 	lds	r24, 0x0115
+ 242:	80 93 4f 01 	sts	0x014F, r24
+	
+	//вывод времени
+	LCD_gotoXY(0,0);
+ 246:	80 e0       	ldi	r24, 0x00	; 0
+ 248:	60 e0       	ldi	r22, 0x00	; 0
+ 24a:	d4 d1       	rcall	.+936    	; 0x5f4 <LCD_gotoXY>
+	LCD_putstring(buf_time);
+ 24c:	c8 01       	movw	r24, r16
+ 24e:	db d1       	rcall	.+950    	; 0x606 <LCD_putstring>
+	//вывод даты 
+	LCD_gotoXY(0,1);
+ 250:	80 e0       	ldi	r24, 0x00	; 0
+ 252:	61 e0       	ldi	r22, 0x01	; 1
+ 254:	cf d1       	rcall	.+926    	; 0x5f4 <LCD_gotoXY>
+	LCD_putstring(buf_time+12);
+ 256:	c8 01       	movw	r24, r16
+ 258:	0c 96       	adiw	r24, 0x0c	; 12
+ 25a:	d5 d1       	rcall	.+938    	; 0x606 <LCD_putstring>
+}
+ 25c:	1f 91       	pop	r17
+ 25e:	0f 91       	pop	r16
+ 260:	08 95       	ret
+
+00000262 <__vector_5>:
+}
+
+///////////////////////////////////////////////////
+// Изменение времени 
+/////////////////////////////////////////////////// 
+ISR(PCINT2_vect) {
+ 262:	1f 92       	push	r1
+ 264:	0f 92       	push	r0
+ 266:	0f b6       	in	r0, 0x3f	; 63
+ 268:	0f 92       	push	r0
+ 26a:	11 24       	eor	r1, r1
+ 26c:	2f 93       	push	r18
+ 26e:	3f 93       	push	r19
+ 270:	4f 93       	push	r20
+ 272:	5f 93       	push	r21
+ 274:	6f 93       	push	r22
+ 276:	7f 93       	push	r23
+ 278:	8f 93       	push	r24
+ 27a:	9f 93       	push	r25
+ 27c:	af 93       	push	r26
+ 27e:	bf 93       	push	r27
+ 280:	ef 93       	push	r30
+ 282:	ff 93       	push	r31
+	//при любой нажатии отсчитываем время 8сек 
+	confmode_off  = COUNTER_FOR_AUTOMATIC_OFF;  	
+ 284:	88 ef       	ldi	r24, 0xF8	; 248
+ 286:	93 e0       	ldi	r25, 0x03	; 3
+ 288:	90 93 58 01 	sts	0x0158, r25
+ 28c:	80 93 57 01 	sts	0x0157, r24
+						
+	//режим изменения времени и перемещение позиции курсора 
+	if  (!button_PIN2_counter &&  BUTTON_CONF)
+ 290:	80 91 55 01 	lds	r24, 0x0155
+ 294:	88 23       	and	r24, r24
+ 296:	29 f4       	brne	.+10     	; 0x2a2 <__vector_5+0x40>
+ 298:	4a 99       	sbic	0x09, 2	; 9
+ 29a:	03 c0       	rjmp	.+6      	; 0x2a2 <__vector_5+0x40>
+		button_PIN2_counter = COUNTER_FOR_BUTTONS;				
+ 29c:	8f e7       	ldi	r24, 0x7F	; 127
+ 29e:	80 93 55 01 	sts	0x0155, r24
+		
+	if (sound_of_alarm && timeout_alarm && BUTTON_DEC)
+ 2a2:	80 91 51 01 	lds	r24, 0x0151
+ 2a6:	88 23       	and	r24, r24
+ 2a8:	41 f0       	breq	.+16     	; 0x2ba <__vector_5+0x58>
+ 2aa:	80 91 59 01 	lds	r24, 0x0159
+ 2ae:	90 91 5a 01 	lds	r25, 0x015A
+ 2b2:	89 2b       	or	r24, r25
+ 2b4:	11 f0       	breq	.+4      	; 0x2ba <__vector_5+0x58>
+ 2b6:	49 9b       	sbis	0x09, 1	; 9
+		AlarmOff();
+ 2b8:	f0 de       	rcall	.-544    	; 0x9a <AlarmOff>
+	
+	if (menu_conf_mode) {		//если режим редактирования
+ 2ba:	80 91 54 01 	lds	r24, 0x0154
+ 2be:	88 23       	and	r24, r24
+ 2c0:	69 f1       	breq	.+90     	; 0x31c <__stack+0x1d>
+		//
+		if (BUTTON_DEC) {		//перемещение позиции курсора :вверх, вниз.
+ 2c2:	49 99       	sbic	0x09, 1	; 9
+ 2c4:	0c c0       	rjmp	.+24     	; 0x2de <__vector_5+0x7c>
+			menu_item ^= 1;			// !а - позиция 1)Time
+ 2c6:	80 91 5b 01 	lds	r24, 0x015B
+ 2ca:	91 e0       	ldi	r25, 0x01	; 1
+ 2cc:	89 27       	eor	r24, r25
+ 2ce:	80 93 5b 01 	sts	0x015B, r24
+								//  menu_item - позиция 2)Alarm
+			LCD_gotoXY(0, menu_item);
+ 2d2:	60 91 5b 01 	lds	r22, 0x015B
+ 2d6:	80 e0       	ldi	r24, 0x00	; 0
+ 2d8:	8d d1       	rcall	.+794    	; 0x5f4 <LCD_gotoXY>
+			conf_mode = 0;
+ 2da:	10 92 52 01 	sts	0x0152, r1
+		}
+		
+		if (BUTTON_CONF){		//короткое нажатие конфигурационной кнопки в режиме редактирования 
+ 2de:	4a 99       	sbic	0x09, 2	; 9
+ 2e0:	13 c0       	rjmp	.+38     	; 0x308 <__stack+0x9>
+			conf_mode = (conf_mode < MAX_CONF_MODE) ? conf_mode+1:0; 
+ 2e2:	80 91 52 01 	lds	r24, 0x0152
+ 2e6:	86 30       	cpi	r24, 0x06	; 6
+ 2e8:	10 f0       	brcs	.+4      	; 0x2ee <__vector_5+0x8c>
+ 2ea:	80 e0       	ldi	r24, 0x00	; 0
+ 2ec:	03 c0       	rjmp	.+6      	; 0x2f4 <__vector_5+0x92>
+ 2ee:	80 91 52 01 	lds	r24, 0x0152
+ 2f2:	8f 5f       	subi	r24, 0xFF	; 255
+ 2f4:	80 93 52 01 	sts	0x0152, r24
+			if (!menu_item) { 	//если положение Time 
+ 2f8:	80 91 5b 01 	lds	r24, 0x015B
+ 2fc:	88 23       	and	r24, r24
+ 2fe:	11 f4       	brne	.+4      	; 0x304 <__stack+0x5>
+				DisplayTime();	//меняем текущее время 
+ 300:	8d df       	rcall	.-230    	; 0x21c <DisplayTime>
+ 302:	01 c0       	rjmp	.+2      	; 0x306 <__stack+0x7>
+				
+			}	
+			else {	
+				DisplayAlarmTime();	// устанавливаем время будильника
+ 304:	50 df       	rcall	.-352    	; 0x1a6 <DisplayAlarmTime>
+			}		
+			SetCursor();
+ 306:	40 df       	rcall	.-384    	; 0x188 <SetCursor>
+		}
+		
+		if (BUTTON_INC){		     //меняем время
+ 308:	48 99       	sbic	0x09, 0	; 9
+ 30a:	08 c0       	rjmp	.+16     	; 0x31c <__stack+0x1d>
+				if (!menu_item){		 //если Time
+ 30c:	80 91 5b 01 	lds	r24, 0x015B
+ 310:	88 23       	and	r24, r24
+ 312:	11 f4       	brne	.+4      	; 0x318 <__stack+0x19>
+					SetTime();		 //текущее время
+ 314:	fd de       	rcall	.-518    	; 0x110 <SetTime>
+ 316:	01 c0       	rjmp	.+2      	; 0x31a <__stack+0x1b>
+					///Set(&current_ds_Time, max_value, min_value, conf_mode);
+				}	
+				else {		 //если Alarm
+					SetAlarmTime();	 //время будильника
+ 318:	21 df       	rcall	.-446    	; 0x15c <SetAlarmTime>
+				}	
+                SetCursor();
+ 31a:	36 df       	rcall	.-404    	; 0x188 <SetCursor>
+		}
+	}	
+	
+	
+	
+}		
+ 31c:	ff 91       	pop	r31
+ 31e:	ef 91       	pop	r30
+ 320:	bf 91       	pop	r27
+ 322:	af 91       	pop	r26
+ 324:	9f 91       	pop	r25
+ 326:	8f 91       	pop	r24
+ 328:	7f 91       	pop	r23
+ 32a:	6f 91       	pop	r22
+ 32c:	5f 91       	pop	r21
+ 32e:	4f 91       	pop	r20
+ 330:	3f 91       	pop	r19
+ 332:	2f 91       	pop	r18
+ 334:	0f 90       	pop	r0
+ 336:	0f be       	out	0x3f, r0	; 63
+ 338:	0f 90       	pop	r0
+ 33a:	1f 90       	pop	r1
+ 33c:	18 95       	reti
+
+0000033e <main>:
+
+__attribute__((naked)) int main(void){
+
+	
+	
+	wdt_reset();
+ 33e:	a8 95       	wdr
+	wdt_enable(WDTO_4S);
+ 340:	28 e2       	ldi	r18, 0x28	; 40
+ 342:	88 e1       	ldi	r24, 0x18	; 24
+ 344:	90 e0       	ldi	r25, 0x00	; 0
+ 346:	0f b6       	in	r0, 0x3f	; 63
+ 348:	f8 94       	cli
+ 34a:	a8 95       	wdr
+ 34c:	80 93 60 00 	sts	0x0060, r24
+ 350:	0f be       	out	0x3f, r0	; 63
+ 352:	20 93 60 00 	sts	0x0060, r18
+
+	LCD_init();	
+ 356:	23 d1       	rcall	.+582    	; 0x59e <LCD_init>
+	init_DS();
+ 358:	ba d1       	rcall	.+884    	; 0x6ce <init_DS>
+			
+		write_DS(0x0F, 0); 
+ 35a:	8f e0       	ldi	r24, 0x0F	; 15
+ 35c:	60 e0       	ldi	r22, 0x00	; 0
+ 35e:	8f d1       	rcall	.+798    	; 0x67e <write_DS>
+		write_DS(0x08, 0x02);		
+ 360:	88 e0       	ldi	r24, 0x08	; 8
+ 362:	62 e0       	ldi	r22, 0x02	; 2
+ 364:	8c d1       	rcall	.+792    	; 0x67e <write_DS>
+		write_DS(0x09, 0x00);
+ 366:	89 e0       	ldi	r24, 0x09	; 9
+ 368:	60 e0       	ldi	r22, 0x00	; 0
+ 36a:	89 d1       	rcall	.+786    	; 0x67e <write_DS>
+		write_DS(0x00, 0x55);	
+ 36c:	80 e0       	ldi	r24, 0x00	; 0
+ 36e:	65 e5       	ldi	r22, 0x55	; 85
+ 370:	86 d1       	rcall	.+780    	; 0x67e <write_DS>
+		write_DS(0x01, 0x01);		
+ 372:	81 e0       	ldi	r24, 0x01	; 1
+ 374:	61 e0       	ldi	r22, 0x01	; 1
+ 376:	83 d1       	rcall	.+774    	; 0x67e <write_DS>
+		write_DS(0x02, 0x00);	
+ 378:	82 e0       	ldi	r24, 0x02	; 2
+ 37a:	60 e0       	ldi	r22, 0x00	; 0
+ 37c:	80 d1       	rcall	.+768    	; 0x67e <write_DS>
+
+	while(1) {
+
+		
+		
+		wdt_reset();
+ 37e:	a8 95       	wdr
+		//обновление текущего времени
+		if (update_flag){
+ 380:	80 91 4d 01 	lds	r24, 0x014D
+ 384:	88 23       	and	r24, r24
+ 386:	41 f0       	breq	.+16     	; 0x398 <main+0x5a>
+			if (ALARM_CHECK)
+ 388:	8f e0       	ldi	r24, 0x0F	; 15
+ 38a:	c2 d1       	rcall	.+900    	; 0x710 <read_DS>
+ 38c:	80 fd       	sbrc	r24, 0
+				AlarmCheck();			
+ 38e:	72 de       	rcall	.-796    	; 0x74 <AlarmCheck>
+			DisplayTime();
+ 390:	45 df       	rcall	.-374    	; 0x21c <DisplayTime>
+			//срабатывание будильника 	
+			update_flag = 0;
+ 392:	10 92 4d 01 	sts	0x014D, r1
+			SetCursor();
+ 396:	f8 de       	rcall	.-528    	; 0x188 <SetCursor>
+		}
+		
+		//update_alarm_flag = 1;
+		if (update_alarm_flag){
+ 398:	80 91 50 01 	lds	r24, 0x0150
+ 39c:	88 23       	and	r24, r24
+ 39e:	79 f3       	breq	.-34     	; 0x37e <main+0x40>
+			DisplayAlarmTime();
+ 3a0:	02 df       	rcall	.-508    	; 0x1a6 <DisplayAlarmTime>
+			update_alarm_flag = 0;
+ 3a2:	10 92 50 01 	sts	0x0150, r1
+			SetCursor();	
+ 3a6:	f0 de       	rcall	.-544    	; 0x188 <SetCursor>
+ 3a8:	ea cf       	rjmp	.-44     	; 0x37e <main+0x40>
+
+000003aa <__vector_2>:
+
+///////////////////////////////////////////////////
+// Увеличивание секунд 
+// Импульсы приходят о выводы INT/SQW
+///////////////////////////////////////////////////
+ISR(INT1_vect){
+ 3aa:	1f 92       	push	r1
+ 3ac:	0f 92       	push	r0
+ 3ae:	0f b6       	in	r0, 0x3f	; 63
+ 3b0:	0f 92       	push	r0
+ 3b2:	11 24       	eor	r1, r1
+ 3b4:	2f 93       	push	r18
+ 3b6:	3f 93       	push	r19
+ 3b8:	4f 93       	push	r20
+ 3ba:	5f 93       	push	r21
+ 3bc:	6f 93       	push	r22
+ 3be:	7f 93       	push	r23
+ 3c0:	8f 93       	push	r24
+ 3c2:	9f 93       	push	r25
+ 3c4:	af 93       	push	r26
+ 3c6:	bf 93       	push	r27
+ 3c8:	ef 93       	push	r30
+ 3ca:	ff 93       	push	r31
+	//не увеличиваем секунды при индикации, 
+	//если включен режим установки для будильника 
+	if (!clock_ticking){
+ 3cc:	80 91 53 01 	lds	r24, 0x0153
+ 3d0:	88 23       	and	r24, r24
+ 3d2:	29 f5       	brne	.+74     	; 0x41e <__vector_2+0x74>
+    // инкрементирование секунд 
+		seconds_lo++;
+ 3d4:	80 91 4f 01 	lds	r24, 0x014F
+ 3d8:	8f 5f       	subi	r24, 0xFF	; 255
+ 3da:	80 93 4f 01 	sts	0x014F, r24
+		// инкерментирование секунд по BCD правилам 
+		if (seconds_lo > '9') {
+ 3de:	80 91 4f 01 	lds	r24, 0x014F
+ 3e2:	8a 33       	cpi	r24, 0x3A	; 58
+ 3e4:	98 f0       	brcs	.+38     	; 0x40c <__vector_2+0x62>
+		    seconds_lo = '0';
+ 3e6:	90 e3       	ldi	r25, 0x30	; 48
+ 3e8:	90 93 4f 01 	sts	0x014F, r25
+			seconds_hi++;
+ 3ec:	80 91 4e 01 	lds	r24, 0x014E
+ 3f0:	8f 5f       	subi	r24, 0xFF	; 255
+ 3f2:	80 93 4e 01 	sts	0x014E, r24
+		    if (seconds_hi  > '5') {
+ 3f6:	80 91 4e 01 	lds	r24, 0x014E
+ 3fa:	86 33       	cpi	r24, 0x36	; 54
+ 3fc:	38 f0       	brcs	.+14     	; 0x40c <__vector_2+0x62>
+			    seconds_lo  = '0';
+ 3fe:	90 93 4f 01 	sts	0x014F, r25
+			    seconds_hi  = '0';					
+ 402:	90 93 4e 01 	sts	0x014E, r25
+				update_flag = 1;	
+ 406:	81 e0       	ldi	r24, 0x01	; 1
+ 408:	80 93 4d 01 	sts	0x014D, r24
+			}
+		}
+		//SetCursor();
+		//перевод курсора на позицию секунд
+		//каждую секунду переписывем только новое значение секуны   
+		LCD_gotoXY(6,0);
+ 40c:	86 e0       	ldi	r24, 0x06	; 6
+ 40e:	60 e0       	ldi	r22, 0x00	; 0
+ 410:	f1 d0       	rcall	.+482    	; 0x5f4 <LCD_gotoXY>
+		LCD_send_data(seconds_hi);
+ 412:	80 91 4e 01 	lds	r24, 0x014E
+ 416:	bd d0       	rcall	.+378    	; 0x592 <LCD_send_data>
+		LCD_send_data(seconds_lo);
+ 418:	80 91 4f 01 	lds	r24, 0x014F
+ 41c:	ba d0       	rcall	.+372    	; 0x592 <LCD_send_data>
+	}
+			
+			
+}
+ 41e:	ff 91       	pop	r31
+ 420:	ef 91       	pop	r30
+ 422:	bf 91       	pop	r27
+ 424:	af 91       	pop	r26
+ 426:	9f 91       	pop	r25
+ 428:	8f 91       	pop	r24
+ 42a:	7f 91       	pop	r23
+ 42c:	6f 91       	pop	r22
+ 42e:	5f 91       	pop	r21
+ 430:	4f 91       	pop	r20
+ 432:	3f 91       	pop	r19
+ 434:	2f 91       	pop	r18
+ 436:	0f 90       	pop	r0
+ 438:	0f be       	out	0x3f, r0	; 63
+ 43a:	0f 90       	pop	r0
+ 43c:	1f 90       	pop	r1
+ 43e:	18 95       	reti
+
+00000440 <__vector_16>:
+
+
+///////////////////////////////////////////////////
+// Обработчик прерываний по T0: время срабатывания = 1с
+///////////////////////////////////////////////////
+ISR(TIMER0_OVF_vect) {
+ 440:	1f 92       	push	r1
+ 442:	0f 92       	push	r0
+ 444:	0f b6       	in	r0, 0x3f	; 63
+ 446:	0f 92       	push	r0
+ 448:	11 24       	eor	r1, r1
+ 44a:	2f 93       	push	r18
+ 44c:	3f 93       	push	r19
+ 44e:	4f 93       	push	r20
+ 450:	5f 93       	push	r21
+ 452:	6f 93       	push	r22
+ 454:	7f 93       	push	r23
+ 456:	8f 93       	push	r24
+ 458:	9f 93       	push	r25
+ 45a:	af 93       	push	r26
+ 45c:	bf 93       	push	r27
+ 45e:	ef 93       	push	r30
+ 460:	ff 93       	push	r31
+	//будильник не сработает в режиме редактирования 
+	if (!clock_ticking){
+ 462:	80 91 53 01 	lds	r24, 0x0153
+ 466:	88 23       	and	r24, r24
+ 468:	d9 f4       	brne	.+54     	; 0x4a0 <__vector_16+0x60>
+		//будильник звенит до тех пор, пока 
+		//не нажата кнопка и не истекло время ожидания
+		if (sound_of_alarm && timeout_alarm){
+ 46a:	80 91 51 01 	lds	r24, 0x0151
+ 46e:	88 23       	and	r24, r24
+ 470:	99 f0       	breq	.+38     	; 0x498 <__vector_16+0x58>
+ 472:	80 91 59 01 	lds	r24, 0x0159
+ 476:	90 91 5a 01 	lds	r25, 0x015A
+ 47a:	89 2b       	or	r24, r25
+ 47c:	69 f0       	breq	.+26     	; 0x498 <__vector_16+0x58>
+///////////////////////////////////////////////////
+// Срабатывание будильника 
+///////////////////////////////////////////////////
+inline static void AlarmOn(void){	
+	//сигнал будильника по возрастающему фронту 
+    if (PIND & (1<<3)){
+ 47e:	4b 9b       	sbis	0x09, 3	; 9
+ 480:	0e c0       	rjmp	.+28     	; 0x49e <__vector_16+0x5e>
+        PORTC |= SND_PIN;
+ 482:	40 9a       	sbi	0x08, 0	; 8
+        //16 сек 
+        timeout_alarm--;	
+ 484:	80 91 59 01 	lds	r24, 0x0159
+ 488:	90 91 5a 01 	lds	r25, 0x015A
+ 48c:	01 97       	sbiw	r24, 0x01	; 1
+ 48e:	90 93 5a 01 	sts	0x015A, r25
+ 492:	80 93 59 01 	sts	0x0159, r24
+ 496:	04 c0       	rjmp	.+8      	; 0x4a0 <__vector_16+0x60>
+		//не нажата кнопка и не истекло время ожидания
+		if (sound_of_alarm && timeout_alarm){
+			AlarmOn();
+		}
+		else {
+			write_DS(0x0F, 0); 
+ 498:	8f e0       	ldi	r24, 0x0F	; 15
+ 49a:	60 e0       	ldi	r22, 0x00	; 0
+ 49c:	f0 d0       	rcall	.+480    	; 0x67e <write_DS>
+			PORTC &= ~SND_PIN;
+ 49e:	40 98       	cbi	0x08, 0	; 8
+		}		
+	}
+	
+	
+	//выход из режима редактирования по истечении 8сек без действий 
+	if (confmode_off) {	
+ 4a0:	80 91 57 01 	lds	r24, 0x0157
+ 4a4:	90 91 58 01 	lds	r25, 0x0158
+ 4a8:	89 2b       	or	r24, r25
+ 4aa:	c1 f0       	breq	.+48     	; 0x4dc <__vector_16+0x9c>
+		confmode_off--;
+ 4ac:	80 91 57 01 	lds	r24, 0x0157
+ 4b0:	90 91 58 01 	lds	r25, 0x0158
+ 4b4:	01 97       	sbiw	r24, 0x01	; 1
+ 4b6:	90 93 58 01 	sts	0x0158, r25
+ 4ba:	80 93 57 01 	sts	0x0157, r24
+		if(!confmode_off) {
+ 4be:	80 91 57 01 	lds	r24, 0x0157
+ 4c2:	90 91 58 01 	lds	r25, 0x0158
+ 4c6:	89 2b       	or	r24, r25
+ 4c8:	49 f4       	brne	.+18     	; 0x4dc <__vector_16+0x9c>
+			clock_ticking = 0;	
+ 4ca:	10 92 53 01 	sts	0x0153, r1
+			if (!clock_ticking){
+ 4ce:	80 91 53 01 	lds	r24, 0x0153
+ 4d2:	88 23       	and	r24, r24
+ 4d4:	19 f4       	brne	.+6      	; 0x4dc <__vector_16+0x9c>
+				DisplayTime();
+ 4d6:	a2 de       	rcall	.-700    	; 0x21c <DisplayTime>
+				LCD_send_cmd(CMD_CURSOR_OFF);
+ 4d8:	8c e0       	ldi	r24, 0x0C	; 12
+ 4da:	5e d0       	rcall	.+188    	; 0x598 <LCD_send_cmd>
+			}
+		}
+	}
+	
+	//режим редактирования
+    if (button_PIN2_counter) {
+ 4dc:	80 91 55 01 	lds	r24, 0x0155
+ 4e0:	88 23       	and	r24, r24
+ 4e2:	39 f1       	breq	.+78     	; 0x532 <__vector_16+0xf2>
+	    button_PIN2_counter--;
+ 4e4:	80 91 55 01 	lds	r24, 0x0155
+ 4e8:	81 50       	subi	r24, 0x01	; 1
+ 4ea:	80 93 55 01 	sts	0x0155, r24
+        if(!button_PIN2_counter && BUTTON_CONF) {
+ 4ee:	80 91 55 01 	lds	r24, 0x0155
+ 4f2:	88 23       	and	r24, r24
+ 4f4:	f1 f4       	brne	.+60     	; 0x532 <__vector_16+0xf2>
+ 4f6:	4a 99       	sbic	0x09, 2	; 9
+ 4f8:	1c c0       	rjmp	.+56     	; 0x532 <__vector_16+0xf2>
+			clock_ticking = 1;		// нужно, чтобы 
+ 4fa:	81 e0       	ldi	r24, 0x01	; 1
+ 4fc:	80 93 53 01 	sts	0x0153, r24
+									//остановить тики во время редактирования
+			menu_conf_mode ^= 1;	// = 1 режим редактирования 
+ 500:	90 91 54 01 	lds	r25, 0x0154
+ 504:	98 27       	eor	r25, r24
+ 506:	90 93 54 01 	sts	0x0154, r25
+			if (menu_conf_mode){
+ 50a:	80 91 54 01 	lds	r24, 0x0154
+ 50e:	88 23       	and	r24, r24
+ 510:	39 f0       	breq	.+14     	; 0x520 <__vector_16+0xe0>
+				DisplayMenu();		//вывод меню 	
+ 512:	67 de       	rcall	.-818    	; 0x1e2 <DisplayMenu>
+				LCD_send_cmd(CMD_CURSOR_ON);
+ 514:	8d e0       	ldi	r24, 0x0D	; 13
+ 516:	40 d0       	rcall	.+128    	; 0x598 <LCD_send_cmd>
+				LCD_gotoXY(0,0);
+ 518:	80 e0       	ldi	r24, 0x00	; 0
+ 51a:	60 e0       	ldi	r22, 0x00	; 0
+ 51c:	6b d0       	rcall	.+214    	; 0x5f4 <LCD_gotoXY>
+ 51e:	09 c0       	rjmp	.+18     	; 0x532 <__vector_16+0xf2>
+			}
+			//при выходе из режима редактирования сбрасываем все переменные 
+			else {
+				DisplayTime();
+ 520:	7d de       	rcall	.-774    	; 0x21c <DisplayTime>
+				LCD_send_cmd(CMD_CURSOR_OFF);
+ 522:	8c e0       	ldi	r24, 0x0C	; 12
+ 524:	39 d0       	rcall	.+114    	; 0x598 <LCD_send_cmd>
+				clock_ticking = 0;
+ 526:	10 92 53 01 	sts	0x0153, r1
+				menu_item=0;
+ 52a:	10 92 5b 01 	sts	0x015B, r1
+				conf_mode = 0;
+ 52e:	10 92 52 01 	sts	0x0152, r1
+			}	
+		}
+	}
+	
+	
+}
+ 532:	ff 91       	pop	r31
+ 534:	ef 91       	pop	r30
+ 536:	bf 91       	pop	r27
+ 538:	af 91       	pop	r26
+ 53a:	9f 91       	pop	r25
+ 53c:	8f 91       	pop	r24
+ 53e:	7f 91       	pop	r23
+ 540:	6f 91       	pop	r22
+ 542:	5f 91       	pop	r21
+ 544:	4f 91       	pop	r20
+ 546:	3f 91       	pop	r19
+ 548:	2f 91       	pop	r18
+ 54a:	0f 90       	pop	r0
+ 54c:	0f be       	out	0x3f, r0	; 63
+ 54e:	0f 90       	pop	r0
+ 550:	1f 90       	pop	r1
+ 552:	18 95       	reti
+
+00000554 <enable>:
+#include "LCD_interface.h"
+//////////////////////////////////////////////////////////////
+//разрешаем обращения к дисплею
+//////////////////////////////////////////////////////////////
+ void enable(void) {
+	PORT_MNG |= (1<<EN_PIN);
+ 554:	28 9a       	sbi	0x05, 0	; 5
+ 556:	85 e0       	ldi	r24, 0x05	; 5
+ 558:	8a 95       	dec	r24
+ 55a:	f1 f7       	brne	.-4      	; 0x558 <enable+0x4>
+	_delay_us(2);
+	PORT_MNG &= ~(1<<EN_PIN);
+ 55c:	28 98       	cbi	0x05, 0	; 5
+ 55e:	8a e6       	ldi	r24, 0x6A	; 106
+ 560:	8a 95       	dec	r24
+ 562:	f1 f7       	brne	.-4      	; 0x560 <enable+0xc>
+	_delay_us(40);
+}
+ 564:	08 95       	ret
+
+00000566 <entering_data_or_command>:
+
+//////////////////////////////////////////////////////////////
+//функция ввода данных или команд
+//на вход подаем символ или команду
+//////////////////////////////////////////////////////////////
+void entering_data_or_command(uint8_t intering) {
+ 566:	1f 93       	push	r17
+ 568:	18 2f       	mov	r17, r24
+	#if (IS_8_WIRES)
+		PORT_LCD = intering;
+		enable();
+	#else
+		PORT_LCD &= 0x0F;
+ 56a:	8b b1       	in	r24, 0x0b	; 11
+ 56c:	8f 70       	andi	r24, 0x0F	; 15
+ 56e:	8b b9       	out	0x0b, r24	; 11
+		PORT_LCD |= (intering & 0xF0);
+ 570:	9b b1       	in	r25, 0x0b	; 11
+ 572:	81 2f       	mov	r24, r17
+ 574:	80 7f       	andi	r24, 0xF0	; 240
+ 576:	89 2b       	or	r24, r25
+ 578:	8b b9       	out	0x0b, r24	; 11
+		enable();
+ 57a:	ec df       	rcall	.-40     	; 0x554 <enable>
+		PORT_LCD &= 0x0F;
+ 57c:	8b b1       	in	r24, 0x0b	; 11
+ 57e:	8f 70       	andi	r24, 0x0F	; 15
+ 580:	8b b9       	out	0x0b, r24	; 11
+		PORT_LCD |= (intering << 4);
+ 582:	8b b1       	in	r24, 0x0b	; 11
+ 584:	12 95       	swap	r17
+ 586:	10 7f       	andi	r17, 0xF0	; 240
+ 588:	81 2b       	or	r24, r17
+ 58a:	8b b9       	out	0x0b, r24	; 11
+		enable();
+ 58c:	e3 df       	rcall	.-58     	; 0x554 <enable>
+	#endif
+}
+ 58e:	1f 91       	pop	r17
+ 590:	08 95       	ret
+
+00000592 <LCD_send_data>:
+//////////////////////////////////////////////////////////////
+//ввод данных 
+//////////////////////////////////////////////////////////////
+void LCD_send_data(uint8_t symbol) {
+	//чтобы подавать данные, выставляем RS = 1 
+	PORT_MNG |= (1<<RS_PIN);
+ 592:	29 9a       	sbi	0x05, 1	; 5
+	entering_data_or_command(symbol);
+ 594:	e8 df       	rcall	.-48     	; 0x566 <entering_data_or_command>
+}
+ 596:	08 95       	ret
+
+00000598 <LCD_send_cmd>:
+//////////////////////////////////////////////////////////////
+//ввод команд
+//////////////////////////////////////////////////////////////
+void LCD_send_cmd(uint8_t cmd) {
+	//чтобы подавать команды, выставляем RS = 0 
+	PORT_MNG &= ~(1<<RS_PIN);
+ 598:	29 98       	cbi	0x05, 1	; 5
+	entering_data_or_command(cmd);	
+ 59a:	e5 df       	rcall	.-54     	; 0x566 <entering_data_or_command>
+}
+ 59c:	08 95       	ret
+
+0000059e <LCD_init>:
+
+	#if (IS_8_WIRES)
+		PORT_LCD = 0;
+		DDR_LCD  = 0xFF;
+	#else
+		PORT_LCD &= 0x0F;
+ 59e:	8b b1       	in	r24, 0x0b	; 11
+ 5a0:	8f 70       	andi	r24, 0x0F	; 15
+ 5a2:	8b b9       	out	0x0b, r24	; 11
+		DDR_LCD  |= 0xF0;
+ 5a4:	8a b1       	in	r24, 0x0a	; 10
+ 5a6:	80 6f       	ori	r24, 0xF0	; 240
+ 5a8:	8a b9       	out	0x0a, r24	; 10
+	#endif
+ 
+	DDR_MNG |= (1<<RS_PIN)|(1<<EN_PIN);
+ 5aa:	84 b1       	in	r24, 0x04	; 4
+ 5ac:	83 60       	ori	r24, 0x03	; 3
+ 5ae:	84 b9       	out	0x04, r24	; 4
+	PORT_MNG &= ~(1<<RS_PIN)|(1<<EN_PIN);
+ 5b0:	29 98       	cbi	0x05, 1	; 5
+ 5b2:	80 e3       	ldi	r24, 0x30	; 48
+ 5b4:	95 e7       	ldi	r25, 0x75	; 117
+ 5b6:	01 97       	sbiw	r24, 0x01	; 1
+ 5b8:	f1 f7       	brne	.-4      	; 0x5b6 <LCD_init+0x18>
+	//на железе
+    _delay_ms(15);
+    LCD_send_cmd(CMD_INIT);
+ 5ba:	83 e0       	ldi	r24, 0x03	; 3
+ 5bc:	ed df       	rcall	.-38     	; 0x598 <LCD_send_cmd>
+ 5be:	80 e4       	ldi	r24, 0x40	; 64
+ 5c0:	9f e1       	ldi	r25, 0x1F	; 31
+ 5c2:	01 97       	sbiw	r24, 0x01	; 1
+ 5c4:	f1 f7       	brne	.-4      	; 0x5c2 <LCD_init+0x24>
+    _delay_ms(4);
+    LCD_send_cmd(CMD_INIT);
+ 5c6:	83 e0       	ldi	r24, 0x03	; 3
+ 5c8:	e7 df       	rcall	.-50     	; 0x598 <LCD_send_cmd>
+ 5ca:	88 ec       	ldi	r24, 0xC8	; 200
+ 5cc:	90 e0       	ldi	r25, 0x00	; 0
+ 5ce:	01 97       	sbiw	r24, 0x01	; 1
+ 5d0:	f1 f7       	brne	.-4      	; 0x5ce <LCD_init+0x30>
+    _delay_us(100);
+	LCD_send_cmd(0b00000011);
+ 5d2:	83 e0       	ldi	r24, 0x03	; 3
+ 5d4:	e1 df       	rcall	.-62     	; 0x598 <LCD_send_cmd>
+	LCD_send_cmd(0b00000010);
+ 5d6:	82 e0       	ldi	r24, 0x02	; 2
+ 5d8:	df df       	rcall	.-66     	; 0x598 <LCD_send_cmd>
+    //LCD_send_cmd(CMD_SET_INTERFACE);
+	LCD_send_cmd(CMD_SET_PARAMETRS);
+ 5da:	8c e2       	ldi	r24, 0x2C	; 44
+ 5dc:	dd df       	rcall	.-70     	; 0x598 <LCD_send_cmd>
+	LCD_send_cmd(CMD_DISPLAY_OFF);
+ 5de:	8c e0       	ldi	r24, 0x0C	; 12
+ 5e0:	db df       	rcall	.-74     	; 0x598 <LCD_send_cmd>
+	LCD_send_cmd(CMD_DISPLAY_CLEAR);
+ 5e2:	81 e0       	ldi	r24, 0x01	; 1
+ 5e4:	d9 df       	rcall	.-78     	; 0x598 <LCD_send_cmd>
+ 5e6:	80 e1       	ldi	r24, 0x10	; 16
+ 5e8:	97 e2       	ldi	r25, 0x27	; 39
+ 5ea:	01 97       	sbiw	r24, 0x01	; 1
+ 5ec:	f1 f7       	brne	.-4      	; 0x5ea <LCD_init+0x4c>
+	_delay_ms(5);
+	LCD_send_cmd(CMD_ENTRY_MODE_SET);
+ 5ee:	86 e0       	ldi	r24, 0x06	; 6
+ 5f0:	d3 df       	rcall	.-90     	; 0x598 <LCD_send_cmd>
+		
+}
+ 5f2:	08 95       	ret
+
+000005f4 <LCD_gotoXY>:
+//row - номер строки (0 или 1) 
+//////////////////////////////////////////////////////////////
+void LCD_gotoXY(uint8_t col, uint8_t row){
+    uint8_t adr;
+	
+    adr=0x40*row+col;
+ 5f4:	62 95       	swap	r22
+ 5f6:	66 0f       	add	r22, r22
+ 5f8:	66 0f       	add	r22, r22
+ 5fa:	60 7c       	andi	r22, 0xC0	; 192
+ 5fc:	68 0f       	add	r22, r24
+    adr|=0x80;
+    LCD_send_cmd(adr);
+ 5fe:	86 2f       	mov	r24, r22
+ 600:	80 68       	ori	r24, 0x80	; 128
+ 602:	ca df       	rcall	.-108    	; 0x598 <LCD_send_cmd>
+}
+ 604:	08 95       	ret
+
+00000606 <LCD_putstring>:
+
+//////////////////////////////////////////////////////////////
+//преобразование данных в строку для вывод на экран 
+//////////////////////////////////////////////////////////////
+void LCD_putstring (uint8_t* s){
+ 606:	1f 93       	push	r17
+ 608:	cf 93       	push	r28
+ 60a:	df 93       	push	r29
+ 60c:	ec 01       	movw	r28, r24
+ 60e:	10 e0       	ldi	r17, 0x00	; 0
+ 610:	02 c0       	rjmp	.+4      	; 0x616 <LCD_putstring+0x10>
+    for (uint8_t i=0; s[i]; i++)
+	    LCD_send_data(s[i]);
+ 612:	bf df       	rcall	.-130    	; 0x592 <LCD_send_data>
+
+//////////////////////////////////////////////////////////////
+//преобразование данных в строку для вывод на экран 
+//////////////////////////////////////////////////////////////
+void LCD_putstring (uint8_t* s){
+    for (uint8_t i=0; s[i]; i++)
+ 614:	1f 5f       	subi	r17, 0xFF	; 255
+ 616:	fe 01       	movw	r30, r28
+ 618:	e1 0f       	add	r30, r17
+ 61a:	f1 1d       	adc	r31, r1
+ 61c:	80 81       	ld	r24, Z
+ 61e:	88 23       	and	r24, r24
+ 620:	c1 f7       	brne	.-16     	; 0x612 <LCD_putstring+0xc>
+	    LCD_send_data(s[i]);
+}	
+ 622:	df 91       	pop	r29
+ 624:	cf 91       	pop	r28
+ 626:	1f 91       	pop	r17
+ 628:	08 95       	ret
+
+0000062a <TWI_SendPocket>:
+    TWI_Stop();
+}
+
+//отправка SLA_W + байт данных
+void TWI_SendPocket (uint8_t  value, uint8_t adres_rw)
+{
+ 62a:	98 2f       	mov	r25, r24
+
+/////////////////////////////////////////////////////
+// Отправка команды СТАРТ
+/////////////////////////////////////////////////////
+static inline void TWI_Start(void){
+	TWCR = (1<<TWINT)|(1<<TWSTA)|(1<<TWEN);
+ 62c:	84 ea       	ldi	r24, 0xA4	; 164
+ 62e:	80 93 bc 00 	sts	0x00BC, r24
+	while (!(TWCR & (1<<TWINT)));//ожидание установки бита TWIN
+ 632:	80 91 bc 00 	lds	r24, 0x00BC
+ 636:	87 ff       	sbrs	r24, 7
+ 638:	fc cf       	rjmp	.-8      	; 0x632 <TWI_SendPocket+0x8>
+}*/
+/////////////////////////////////////////////////////
+// Отправка байта
+/////////////////////////////////////////////////////
+static inline void TWI_SendByte(uint8_t c){
+	TWDR = c;//загрузка значения в регистр данных
+ 63a:	60 93 bb 00 	sts	0x00BB, r22
+	TWCR = (1<<TWINT)|(1<<TWEN);//начало передачи байта данных
+ 63e:	84 e8       	ldi	r24, 0x84	; 132
+ 640:	80 93 bc 00 	sts	0x00BC, r24
+	while (!(TWCR & (1<<TWINT)));//ожидание установки бита TWIN
+ 644:	80 91 bc 00 	lds	r24, 0x00BC
+ 648:	87 ff       	sbrs	r24, 7
+ 64a:	fc cf       	rjmp	.-8      	; 0x644 <TWI_SendPocket+0x1a>
+}*/
+/////////////////////////////////////////////////////
+// Отправка байта
+/////////////////////////////////////////////////////
+static inline void TWI_SendByte(uint8_t c){
+	TWDR = c;//загрузка значения в регистр данных
+ 64c:	90 93 bb 00 	sts	0x00BB, r25
+	TWCR = (1<<TWINT)|(1<<TWEN);//начало передачи байта данных
+ 650:	84 e8       	ldi	r24, 0x84	; 132
+ 652:	80 93 bc 00 	sts	0x00BC, r24
+	while (!(TWCR & (1<<TWINT)));//ожидание установки бита TWIN
+ 656:	80 91 bc 00 	lds	r24, 0x00BC
+ 65a:	87 ff       	sbrs	r24, 7
+ 65c:	fc cf       	rjmp	.-8      	; 0x656 <TWI_SendPocket+0x2c>
+}
+/////////////////////////////////////////////////////
+// Отправка команды СТОП
+/////////////////////////////////////////////////////
+static inline void TWI_Stop(void){
+	TWCR = (1<<TWINT)|(1<<TWSTO)|(1<<TWEN);
+ 65e:	84 e9       	ldi	r24, 0x94	; 148
+ 660:	80 93 bc 00 	sts	0x00BC, r24
+{
+	TWI_Start(); // генерируем условие СТАРТ
+	TWI_SendByte(adres_rw); //оправляем адрес устройства+бит запись
+	TWI_SendByte(value);//отправляем байт данных
+	TWI_Stop();//генерируем условие СТОП
+}
+ 664:	08 95       	ret
+
+00000666 <TWI_RecieveByte>:
+//добавляем функции чтения по I2C
+//чтение байта
+uint8_t TWI_RecieveByte(void)
+{
+	uint8_t dat;//переменная хранения значения
+	TWCR |= (1<<TWINT)|(1<<TWEN)|(1<<TWEA);
+ 666:	80 91 bc 00 	lds	r24, 0x00BC
+ 66a:	84 6c       	ori	r24, 0xC4	; 196
+ 66c:	80 93 bc 00 	sts	0x00BC, r24
+	while (!(TWCR & (1<<TWINT)));//ожидание установки бита TWIN
+ 670:	80 91 bc 00 	lds	r24, 0x00BC
+ 674:	87 ff       	sbrs	r24, 7
+ 676:	fc cf       	rjmp	.-8      	; 0x670 <TWI_RecieveByte+0xa>
+	dat = TWDR;//читаем регистр данных
+ 678:	80 91 bb 00 	lds	r24, 0x00BB
+	return dat;
+}
+ 67c:	08 95       	ret
+
+0000067e <write_DS>:
+}
+
+/////////////////////////////////////////////////////
+// Функция записи одного регистра 
+/////////////////////////////////////////////////////
+void write_DS(uint8_t reg, uint8_t time){ //передаем два параметра: адрес регистра, к которому будем обращаться и передаваемую информациюz{
+ 67e:	98 2f       	mov	r25, r24
+
+/////////////////////////////////////////////////////
+// Отправка команды СТАРТ
+/////////////////////////////////////////////////////
+static inline void TWI_Start(void){
+	TWCR = (1<<TWINT)|(1<<TWSTA)|(1<<TWEN);
+ 680:	84 ea       	ldi	r24, 0xA4	; 164
+ 682:	80 93 bc 00 	sts	0x00BC, r24
+	while (!(TWCR & (1<<TWINT)));//ожидание установки бита TWIN
+ 686:	80 91 bc 00 	lds	r24, 0x00BC
+ 68a:	87 ff       	sbrs	r24, 7
+ 68c:	fc cf       	rjmp	.-8      	; 0x686 <write_DS+0x8>
+}*/
+/////////////////////////////////////////////////////
+// Отправка байта
+/////////////////////////////////////////////////////
+static inline void TWI_SendByte(uint8_t c){
+	TWDR = c;//загрузка значения в регистр данных
+ 68e:	80 ed       	ldi	r24, 0xD0	; 208
+ 690:	80 93 bb 00 	sts	0x00BB, r24
+	TWCR = (1<<TWINT)|(1<<TWEN);//начало передачи байта данных
+ 694:	84 e8       	ldi	r24, 0x84	; 132
+ 696:	80 93 bc 00 	sts	0x00BC, r24
+	while (!(TWCR & (1<<TWINT)));//ожидание установки бита TWIN
+ 69a:	80 91 bc 00 	lds	r24, 0x00BC
+ 69e:	87 ff       	sbrs	r24, 7
+ 6a0:	fc cf       	rjmp	.-8      	; 0x69a <write_DS+0x1c>
+}*/
+/////////////////////////////////////////////////////
+// Отправка байта
+/////////////////////////////////////////////////////
+static inline void TWI_SendByte(uint8_t c){
+	TWDR = c;//загрузка значения в регистр данных
+ 6a2:	90 93 bb 00 	sts	0x00BB, r25
+	TWCR = (1<<TWINT)|(1<<TWEN);//начало передачи байта данных
+ 6a6:	84 e8       	ldi	r24, 0x84	; 132
+ 6a8:	80 93 bc 00 	sts	0x00BC, r24
+	while (!(TWCR & (1<<TWINT)));//ожидание установки бита TWIN
+ 6ac:	80 91 bc 00 	lds	r24, 0x00BC
+ 6b0:	87 ff       	sbrs	r24, 7
+ 6b2:	fc cf       	rjmp	.-8      	; 0x6ac <write_DS+0x2e>
+}*/
+/////////////////////////////////////////////////////
+// Отправка байта
+/////////////////////////////////////////////////////
+static inline void TWI_SendByte(uint8_t c){
+	TWDR = c;//загрузка значения в регистр данных
+ 6b4:	60 93 bb 00 	sts	0x00BB, r22
+	TWCR = (1<<TWINT)|(1<<TWEN);//начало передачи байта данных
+ 6b8:	84 e8       	ldi	r24, 0x84	; 132
+ 6ba:	80 93 bc 00 	sts	0x00BC, r24
+	while (!(TWCR & (1<<TWINT)));//ожидание установки бита TWIN
+ 6be:	80 91 bc 00 	lds	r24, 0x00BC
+ 6c2:	87 ff       	sbrs	r24, 7
+ 6c4:	fc cf       	rjmp	.-8      	; 0x6be <write_DS+0x40>
+}
+/////////////////////////////////////////////////////
+// Отправка команды СТОП
+/////////////////////////////////////////////////////
+static inline void TWI_Stop(void){
+	TWCR = (1<<TWINT)|(1<<TWSTO)|(1<<TWEN);
+ 6c6:	84 e9       	ldi	r24, 0x94	; 148
+ 6c8:	80 93 bc 00 	sts	0x00BC, r24
+	TWI_SendByte(ADDRESS_W);   //оправляем адрес устройства+бит запись
+    TWI_SendByte(reg);        //Адрес регистра 
+	//Передаем информацию для записи в байт регистра
+	TWI_SendByte(time);
+	TWI_Stop();				//формируем состояние СТОП
+}
+ 6cc:	08 95       	ret
+
+000006ce <init_DS>:
+/////////////////////////////////////////////////////
+// Функция инициализации часов  
+/////////////////////////////////////////////////////
+void init_DS(void){
+	
+    DDRD  &= ~((1<<0)&(1<<1)&(1<<2)&(1<<3));  // Кнопки 
+ 6ce:	8a b1       	in	r24, 0x0a	; 10
+ 6d0:	8a b9       	out	0x0a, r24	; 10
+    PORTD |= (1<<0)|(1<<1)|(1<<2)|(1<<3);	
+ 6d2:	8b b1       	in	r24, 0x0b	; 11
+ 6d4:	8f 60       	ori	r24, 0x0F	; 15
+ 6d6:	8b b9       	out	0x0b, r24	; 11
+	
+	
+    DDRC  |= (1<<3)|(1<<0); 		//динамик 
+ 6d8:	87 b1       	in	r24, 0x07	; 7
+ 6da:	89 60       	ori	r24, 0x09	; 9
+ 6dc:	87 b9       	out	0x07, r24	; 7
+	
+	write_DS(0x0E, 0); 				//  включение INT/SQW		
+ 6de:	8e e0       	ldi	r24, 0x0E	; 14
+ 6e0:	60 e0       	ldi	r22, 0x00	; 0
+ 6e2:	cd df       	rcall	.-102    	; 0x67e <write_DS>
+	
+	// прерывание от INT/SQW
+    EIMSK = (1<<INT1);
+ 6e4:	82 e0       	ldi	r24, 0x02	; 2
+ 6e6:	8d bb       	out	0x1d, r24	; 29
+    EICRA = (1<<ISC11)|(1<<ISC10);
+ 6e8:	8c e0       	ldi	r24, 0x0C	; 12
+ 6ea:	80 93 69 00 	sts	0x0069, r24
+    
+	// таймер T0
+    TIMSK0 = (1<<TOIE0);  
+ 6ee:	81 e0       	ldi	r24, 0x01	; 1
+ 6f0:	80 93 6e 00 	sts	0x006E, r24
+    TCCR0B = (1<<CS02);//|(1<<CS00); //предделитель 1024
+ 6f4:	84 e0       	ldi	r24, 0x04	; 4
+ 6f6:	85 bd       	out	0x25, r24	; 37
+  
+	// прерывания от кнопок 
+    PCICR  |= (1<<PCIE2);
+ 6f8:	e8 e6       	ldi	r30, 0x68	; 104
+ 6fa:	f0 e0       	ldi	r31, 0x00	; 0
+ 6fc:	80 81       	ld	r24, Z
+ 6fe:	84 60       	ori	r24, 0x04	; 4
+ 700:	80 83       	st	Z, r24
+	PCMSK2 |= (1<<PCINT16)|(1<<PCINT17)|(1<<PCINT18);
+ 702:	ed e6       	ldi	r30, 0x6D	; 109
+ 704:	f0 e0       	ldi	r31, 0x00	; 0
+ 706:	80 81       	ld	r24, Z
+ 708:	87 60       	ori	r24, 0x07	; 7
+ 70a:	80 83       	st	Z, r24
+		write_ds_Time.month   = 0x05;
+		
+		ds_SetTime(&write_ds_Time);
+	#endif	    
+	
+	sei();
+ 70c:	78 94       	sei
+
+}
+ 70e:	08 95       	ret
+
+00000710 <read_DS>:
+}
+
+/////////////////////////////////////////////////////
+// Функция чтения одного регистра 
+/////////////////////////////////////////////////////
+uint8_t read_DS(uint8_t reg){ //Передаем адрес регистра{
+ 710:	98 2f       	mov	r25, r24
+
+/////////////////////////////////////////////////////
+// Отправка команды СТАРТ
+/////////////////////////////////////////////////////
+static inline void TWI_Start(void){
+	TWCR = (1<<TWINT)|(1<<TWSTA)|(1<<TWEN);
+ 712:	84 ea       	ldi	r24, 0xA4	; 164
+ 714:	80 93 bc 00 	sts	0x00BC, r24
+	while (!(TWCR & (1<<TWINT)));//ожидание установки бита TWIN
+ 718:	80 91 bc 00 	lds	r24, 0x00BC
+ 71c:	87 ff       	sbrs	r24, 7
+ 71e:	fc cf       	rjmp	.-8      	; 0x718 <read_DS+0x8>
+}*/
+/////////////////////////////////////////////////////
+// Отправка байта
+/////////////////////////////////////////////////////
+static inline void TWI_SendByte(uint8_t c){
+	TWDR = c;//загрузка значения в регистр данных
+ 720:	80 ed       	ldi	r24, 0xD0	; 208
+ 722:	80 93 bb 00 	sts	0x00BB, r24
+	TWCR = (1<<TWINT)|(1<<TWEN);//начало передачи байта данных
+ 726:	84 e8       	ldi	r24, 0x84	; 132
+ 728:	80 93 bc 00 	sts	0x00BC, r24
+	while (!(TWCR & (1<<TWINT)));//ожидание установки бита TWIN
+ 72c:	80 91 bc 00 	lds	r24, 0x00BC
+ 730:	87 ff       	sbrs	r24, 7
+ 732:	fc cf       	rjmp	.-8      	; 0x72c <read_DS+0x1c>
+}*/
+/////////////////////////////////////////////////////
+// Отправка байта
+/////////////////////////////////////////////////////
+static inline void TWI_SendByte(uint8_t c){
+	TWDR = c;//загрузка значения в регистр данных
+ 734:	90 93 bb 00 	sts	0x00BB, r25
+	TWCR = (1<<TWINT)|(1<<TWEN);//начало передачи байта данных
+ 738:	84 e8       	ldi	r24, 0x84	; 132
+ 73a:	80 93 bc 00 	sts	0x00BC, r24
+	while (!(TWCR & (1<<TWINT)));//ожидание установки бита TWIN
+ 73e:	80 91 bc 00 	lds	r24, 0x00BC
+ 742:	87 ff       	sbrs	r24, 7
+ 744:	fc cf       	rjmp	.-8      	; 0x73e <read_DS+0x2e>
+
+/////////////////////////////////////////////////////
+// Отправка команды СТАРТ
+/////////////////////////////////////////////////////
+static inline void TWI_Start(void){
+	TWCR = (1<<TWINT)|(1<<TWSTA)|(1<<TWEN);
+ 746:	84 ea       	ldi	r24, 0xA4	; 164
+ 748:	80 93 bc 00 	sts	0x00BC, r24
+	while (!(TWCR & (1<<TWINT)));//ожидание установки бита TWIN
+ 74c:	80 91 bc 00 	lds	r24, 0x00BC
+ 750:	87 ff       	sbrs	r24, 7
+ 752:	fc cf       	rjmp	.-8      	; 0x74c <read_DS+0x3c>
+}*/
+/////////////////////////////////////////////////////
+// Отправка байта
+/////////////////////////////////////////////////////
+static inline void TWI_SendByte(uint8_t c){
+	TWDR = c;//загрузка значения в регистр данных
+ 754:	81 ed       	ldi	r24, 0xD1	; 209
+ 756:	80 93 bb 00 	sts	0x00BB, r24
+	TWCR = (1<<TWINT)|(1<<TWEN);//начало передачи байта данных
+ 75a:	84 e8       	ldi	r24, 0x84	; 132
+ 75c:	80 93 bc 00 	sts	0x00BC, r24
+	while (!(TWCR & (1<<TWINT)));//ожидание установки бита TWIN
+ 760:	80 91 bc 00 	lds	r24, 0x00BC
+ 764:	87 ff       	sbrs	r24, 7
+ 766:	fc cf       	rjmp	.-8      	; 0x760 <read_DS+0x50>
+
+/////////////////////////////////////////////////////
+// Чтение байта 
+/////////////////////////////////////////////////////
+static inline void TWI_ReadByte(void){
+	TWCR = (1<<TWINT)|(1<<TWEN);
+ 768:	84 e8       	ldi	r24, 0x84	; 132
+ 76a:	80 93 bc 00 	sts	0x00BC, r24
+    while (!(TWCR & (1<<TWINT)));
+ 76e:	80 91 bc 00 	lds	r24, 0x00BC
+ 772:	87 ff       	sbrs	r24, 7
+ 774:	fc cf       	rjmp	.-8      	; 0x76e <read_DS+0x5e>
+}
+/////////////////////////////////////////////////////
+// Отправка команды СТОП
+/////////////////////////////////////////////////////
+static inline void TWI_Stop(void){
+	TWCR = (1<<TWINT)|(1<<TWSTO)|(1<<TWEN);
+ 776:	84 e9       	ldi	r24, 0x94	; 148
+ 778:	80 93 bc 00 	sts	0x00BC, r24
+    TWI_SendByte(ADDRESS_W);  
+    TWI_SendByte(reg);  
+    TWI_Start();
+	TWI_SendByte(ADDRESS_R);   
+	TWI_ReadByte();
+	time = TWDR;
+ 77c:	80 91 bb 00 	lds	r24, 0x00BB
+    return time;
+}
+ 780:	08 95       	ret
+
+00000782 <ds_GetTime>:
+////////////////////////////////////////////////////
+//функция читает все регистры
+////////////////////////////////////////////////////
+void ds_GetTime(struct Time* ds){
+ 782:	1f 93       	push	r17
+ 784:	cf 93       	push	r28
+ 786:	df 93       	push	r29
+	uint8_t* p = (uint8_t*)ds;
+ 788:	ec 01       	movw	r28, r24
+ 78a:	10 e0       	ldi	r17, 0x00	; 0
+	
+	for(uint8_t i=0;i<7;i++)
+	    *p++=read_DS(SECONDS_REG+i);
+ 78c:	81 2f       	mov	r24, r17
+ 78e:	c0 df       	rcall	.-128    	; 0x710 <read_DS>
+ 790:	89 93       	st	Y+, r24
+//функция читает все регистры
+////////////////////////////////////////////////////
+void ds_GetTime(struct Time* ds){
+	uint8_t* p = (uint8_t*)ds;
+	
+	for(uint8_t i=0;i<7;i++)
+ 792:	1f 5f       	subi	r17, 0xFF	; 255
+ 794:	17 30       	cpi	r17, 0x07	; 7
+ 796:	d1 f7       	brne	.-12     	; 0x78c <ds_GetTime+0xa>
+	    *p++=read_DS(SECONDS_REG+i);
+}
+ 798:	df 91       	pop	r29
+ 79a:	cf 91       	pop	r28
+ 79c:	1f 91       	pop	r17
+ 79e:	08 95       	ret
+
+000007a0 <ds_SetTime>:
+
+
+////////////////////////////////////////////////////
+//функция записывает все регистры (времени и даты)
+////////////////////////////////////////////////////
+void ds_SetTime(struct Time* ds){
+ 7a0:	1f 93       	push	r17
+ 7a2:	cf 93       	push	r28
+ 7a4:	df 93       	push	r29
+	uint8_t* p = (uint8_t*)ds;
+ 7a6:	ec 01       	movw	r28, r24
+ 7a8:	10 e0       	ldi	r17, 0x00	; 0
+	
+	for(uint8_t i=0;i<7;i++)
+	    write_DS(SECONDS_REG+i, *p++);
+ 7aa:	69 91       	ld	r22, Y+
+ 7ac:	81 2f       	mov	r24, r17
+ 7ae:	67 df       	rcall	.-306    	; 0x67e <write_DS>
+//функция записывает все регистры (времени и даты)
+////////////////////////////////////////////////////
+void ds_SetTime(struct Time* ds){
+	uint8_t* p = (uint8_t*)ds;
+	
+	for(uint8_t i=0;i<7;i++)
+ 7b0:	1f 5f       	subi	r17, 0xFF	; 255
+ 7b2:	17 30       	cpi	r17, 0x07	; 7
+ 7b4:	d1 f7       	brne	.-12     	; 0x7aa <ds_SetTime+0xa>
+	    write_DS(SECONDS_REG+i, *p++);
+}
+ 7b6:	df 91       	pop	r29
+ 7b8:	cf 91       	pop	r28
+ 7ba:	1f 91       	pop	r17
+ 7bc:	08 95       	ret
+
+000007be <time2str>:
+
+////////////////////////////////////////////////////
+// преобразовывает значения в строку для вывода на экран 
+////////////////////////////////////////////////////
+void time2str(struct Time* ds, uint8_t* s) {
+ 7be:	cf 93       	push	r28
+ 7c0:	df 93       	push	r29
+ 7c2:	fb 01       	movw	r30, r22
+	uint8_t* p = (uint8_t*)ds;
+ 7c4:	ec 01       	movw	r28, r24
+ 7c6:	db 01       	movw	r26, r22
+ 7c8:	90 e0       	ldi	r25, 0x00	; 0
+
+	for(uint8_t i=0;i<7;i++) {
+		s[3*i]   = (*p>>4)+'0';
+ 7ca:	88 81       	ld	r24, Y
+ 7cc:	82 95       	swap	r24
+ 7ce:	8f 70       	andi	r24, 0x0F	; 15
+ 7d0:	80 5d       	subi	r24, 0xD0	; 208
+ 7d2:	8c 93       	st	X, r24
+		s[3*i+1] = (*p&0x0F)+'0';
+ 7d4:	89 91       	ld	r24, Y+
+ 7d6:	8f 70       	andi	r24, 0x0F	; 15
+ 7d8:	80 5d       	subi	r24, 0xD0	; 208
+ 7da:	11 96       	adiw	r26, 0x01	; 1
+ 7dc:	8c 93       	st	X, r24
+ 7de:	11 97       	sbiw	r26, 0x01	; 1
+// преобразовывает значения в строку для вывода на экран 
+////////////////////////////////////////////////////
+void time2str(struct Time* ds, uint8_t* s) {
+	uint8_t* p = (uint8_t*)ds;
+
+	for(uint8_t i=0;i<7;i++) {
+ 7e0:	9f 5f       	subi	r25, 0xFF	; 255
+ 7e2:	13 96       	adiw	r26, 0x03	; 3
+ 7e4:	97 30       	cpi	r25, 0x07	; 7
+ 7e6:	89 f7       	brne	.-30     	; 0x7ca <time2str+0xc>
+	}
+	uint8_t x;
+	
+	// меняем местами биты для хранения секунд с битами 
+	// для хранения часов 
+    INTERCHANGE_BYTES(s[0], s[6], x);
+ 7e8:	90 81       	ld	r25, Z
+ 7ea:	86 81       	ldd	r24, Z+6	; 0x06
+ 7ec:	80 83       	st	Z, r24
+ 7ee:	96 83       	std	Z+6, r25	; 0x06
+	INTERCHANGE_BYTES(s[1], s[7], x);
+ 7f0:	91 81       	ldd	r25, Z+1	; 0x01
+ 7f2:	87 81       	ldd	r24, Z+7	; 0x07
+ 7f4:	81 83       	std	Z+1, r24	; 0x01
+ 7f6:	97 83       	std	Z+7, r25	; 0x07
+ 7f8:	df 91       	pop	r29
+ 7fa:	cf 91       	pop	r28
+ 7fc:	08 95       	ret
+
+000007fe <_exit>:
+ 7fe:	f8 94       	cli
+
+00000800 <__stop_program>:
+ 800:	ff cf       	rjmp	.-2      	; 0x800 <__stop_program>
